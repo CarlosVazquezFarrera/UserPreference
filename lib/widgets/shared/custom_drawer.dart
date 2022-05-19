@@ -12,6 +12,11 @@ class CustomDrawer extends StatelessWidget {
         children: const [
           _Header(),
           _ItemDrawer(
+            icon: Icons.home,
+            tittle: 'Home',
+            routeName: Routes.home,
+          ),
+          _ItemDrawer(
             icon: Icons.person,
             tittle: 'Profile',
             routeName: Routes.profile,
@@ -44,7 +49,10 @@ class _ItemDrawer extends StatelessWidget {
       leading: Icon(icon),
       title: Text(tittle),
       onTap: () {
+        final String actualRoute = ModalRoute.of(context)!.settings.name!;
         Navigator.pop(context);
+        if (actualRoute == routeName) return;
+
         Navigator.pushReplacementNamed(context, routeName);
       },
     );
