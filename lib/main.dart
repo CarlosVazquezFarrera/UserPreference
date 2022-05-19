@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:user_preference/routes/app_router.dart';
+import 'package:user_preference/routes/routes.dart';
+import 'package:user_preference/theme/custom_theme.dart';
 
 void main() => runApp(const MyApp());
 
@@ -8,17 +11,11 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       title: 'App Preference',
-      home: Scaffold(
-        appBar: AppBar(
-          title: const Text('Material App Bar'),
-        ),
-        body: Center(
-          child: Container(
-            child: const Text('Hello World'),
-          ),
-        ),
-      ),
+      theme: CustomTheme.customTheme,
+      initialRoute: Routes.home,
+      routes: AppRouter.routes,
     );
   }
 }
