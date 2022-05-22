@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+
 import 'package:user_preference/widgets/widgets.dart';
+
+import 'package:user_preference/helpers/user_preferences.dart';
 
 class ProfileScreen extends StatelessWidget {
   const ProfileScreen({Key? key}) : super(key: key);
@@ -13,10 +16,10 @@ class ProfileScreen extends StatelessWidget {
         drawer: const CustomDrawer(),
         body: Column(
           mainAxisAlignment: MainAxisAlignment.center,
-          children: const [
-            _SettingsItem(texto: 'Is DarkMode'),
-            _SettingsItem(texto: 'Género'),
-            _SettingsItem(texto: 'Nombre De Usuario')
+          children: [
+            _SettingsItem(texto: 'Is DarkMode ${UserPreferences.isDarkMode}'),
+            _SettingsItem(texto: 'Género ${UserPreferences.genderString}'),
+            _SettingsItem(texto: 'Nombre De Usuario ${UserPreferences.name}')
           ],
         ));
   }

@@ -31,12 +31,16 @@ class UserPreferences {
     return _prefs.getString(Preferences.name) ?? _name;
   }
 
-  static set gender(int value) {
-    _gender = value;
+  static set gender(int? value) {
+    _gender = value!;
     _prefs.setInt(Preferences.gender, value);
   }
 
   static int get gender {
     return _prefs.getInt(Preferences.gender) ?? _gender;
+  }
+
+  static String get genderString {
+    return _gender == 1 ? 'M' : 'F';
   }
 }

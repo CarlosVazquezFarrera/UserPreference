@@ -1,5 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:user_preference/providers/providers.dart';
+
 import 'package:user_preference/widgets/widgets.dart';
+
+import 'package:user_preference/helpers/user_preferences.dart';
 
 class SettingsScreen extends StatefulWidget {
   const SettingsScreen({Key? key}) : super(key: key);
@@ -9,10 +14,6 @@ class SettingsScreen extends StatefulWidget {
 }
 
 class _SettingsScreenState extends State<SettingsScreen> {
-  bool isDarkMode = false;
-  int gender = 1;
-  String name = 'Carlos';
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -25,26 +26,34 @@ class _SettingsScreenState extends State<SettingsScreen> {
             children: [
               SwitchListTile.adaptive(
                   title: const Text('DarkMode'),
-                  value: isDarkMode,
-                  onChanged: (value) => setState(() => isDarkMode = value)),
+                  value: UserPreferences.isDarkMode,
+                  onChanged: (value) => setState(() {
+                        UserPreferences.isDarkMode = value;
+                        final uiProvider =
+                            Provider.of<UiProvider>(context, listen: false);
+                        uiProvider.chageTheme = value;
+                      })),
               const Divider(),
               RadioListTile<int>(
                   title: const Text('Masculino'),
                   value: 1,
-                  groupValue: gender,
-                  onChanged: (value) => setState(() => gender = value!)),
+                  groupValue: UserPreferences.gender,
+                  onChanged: (value) =>
+                      setState(() => UserPreferences.gender = value)),
               RadioListTile<int>(
                   title: const Text('Femenino'),
                   value: 2,
-                  groupValue: gender,
-                  onChanged: (value) => setState(() => gender = value!)),
+                  groupValue: UserPreferences.gender,
+                  onChanged: (value) =>
+                      setState(() => UserPreferences.gender = value!)),
               const Divider(),
               Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 20),
                   child: TextFormField(
-                      initialValue: 'Carlos',
+                      initialValue: UserPreferences.name,
                       decoration: const InputDecoration(labelText: 'Nombre'),
-                      onChanged: (value) => setState(() => name = value)))
+                      onChanged: (value) =>
+                          setState(() => UserPreferences.name = value)))
             ],
           ),
         ));
