@@ -5,8 +5,8 @@ class UserPreferences {
   static late SharedPreferences _prefs;
 
   static bool _isDarkMode = false;
-  static const String _name = '';
-  static const int _gender = 1;
+  static String _name = '';
+  static int _gender = 1;
 
   ///creates an instance of SharedPreferences and keeps it on memory as a Singleto
   static Future<void> init() async {
@@ -23,11 +23,20 @@ class UserPreferences {
   }
 
   static set name(String value) {
-    name = value;
+    _name = value;
     _prefs.setString(Preferences.name, value);
   }
 
   static String get name {
     return _prefs.getString(Preferences.name) ?? _name;
+  }
+
+  static set gender(int value) {
+    _gender = value;
+    _prefs.setInt(Preferences.gender, value);
+  }
+
+  static int get gender {
+    return _prefs.getInt(Preferences.gender) ?? _gender;
   }
 }
